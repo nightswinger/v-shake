@@ -21,12 +21,9 @@ app.use(VShake);
 Add `v-shake` directive to element you want to shake.
 
 ```html
-<span v-shake
-  >I am a cat</span>
-    <span v-shake="{ trigger: 'click' }">As yet I have no name.</span>
-    <span v-shake="{ trigger: 'click', type='vertical' }"
-      >I've no idea where I was born.</span
-    ></span
-  ></span
->
+<span v-shake>I am a cat</span>
+<span v-shake="{ trigger: 'click' }">As yet I have no name.</span>
+<span v-shake="{ trigger: 'click', type='vertical' }">
+  I've no idea where I was born.
+</span>
 ```
