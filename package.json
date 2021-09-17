@@ -1,9 +1,11 @@
 {
   "name": "v-shake",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "description": "Simple shake animation directive for Vue 3.0",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/v-shake.es.js",
   "module": "dist/v-shake.umd.js",
   "scripts": {
