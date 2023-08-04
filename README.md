@@ -2,6 +2,12 @@
 
 Simple shake animation directive for Vue 3.0
 
+## Demo
+
+You can view the demo of the project here:
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/vue-xucuer)
+
 ## Install
 
 ```bash
