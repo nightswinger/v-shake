@@ -1,6 +1,6 @@
 {
   "name": "v-shake",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "description": "Simple shake animation directive for Vue 3.0",
   "files": [
