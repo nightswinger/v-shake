@@ -1,3 +1,5 @@
+import keyframes from "./keyframes";
+
 const defaultOptions = {
   trigger: "hover",
   type: "default",
@@ -41,11 +43,12 @@ const setEventListeners = (el: HTMLElement, { trigger, type }: any) => {
 
   if (!triggerEvent || !endEvent) return;
 
-  const triggerFnc = () => {
-    el.style.setProperty("animation-name", `v-shake-${type}`);
-    el.style.setProperty("animation-duration", "500ms");
-  };
-  el.addEventListener(triggerEvent, triggerFnc);
+  el.addEventListener(triggerEvent, () => {
+    if (isInlineElement(el)) {
+      el.style.display = 'inline-block';
+    }
+    el.animate(keyframes[type], { duration: 500 });
+  });
   el.addEventListener("animationend", () => removeAnimation(el));
 
   if (triggerEvent !== endEvent) {
@@ -58,7 +61,11 @@ const setAnimation = (el: HTMLElement, { type }: any) => {
   el.style.setProperty("animation-duration", "500ms");
 };
 
-const removeAnimation = (el: HTMLElement) =>
+const removeAnimation = (el: HTMLElement) => {
   el.style.setProperty("animation", null);
+}
+
+const isInlineElement = (el: HTMLElement) => 
+  window.getComputedStyle(el)['display'] === 'inline';
 
 export { getOptions, setEventListeners, setAnimation, removeAnimation };
