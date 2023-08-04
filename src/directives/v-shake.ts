@@ -5,7 +5,6 @@ import {
   setAnimation,
   removeAnimation,
 } from "./utils";
-import "./v-shake.css";
 
 export const vShake: Directive = {
   mounted(el, { value }) {
