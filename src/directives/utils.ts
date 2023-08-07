@@ -1,4 +1,4 @@
-import keyframes from "./keyframes";
+import { generateKeyframes } from "./keyframes";
 
 const defaultOptions = {
   trigger: "hover",
@@ -43,11 +43,13 @@ const setEventListeners = (el: HTMLElement, { trigger, type }: any) => {
 
   if (!triggerEvent || !endEvent) return;
 
+  const keyframes = generateKeyframes(type);
+
   el.addEventListener(triggerEvent, () => {
     if (isInlineElement(el)) {
       el.style.display = 'inline-block';
     }
-    el.animate(keyframes[type], { duration: 500 });
+    el.animate(keyframes, { duration: 500 });
   });
   el.addEventListener("animationend", () => removeAnimation(el));
 
