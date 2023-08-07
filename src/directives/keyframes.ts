@@ -1,47 +1,40 @@
-interface TKeyFrames {
-  [key: string]: any;
-}
-
-const keyframes: TKeyFrames = {
-  default: [
-    { transform: 'translate(1px, 1px) rotate(0deg)', offset: 0 },
-    { transform: 'translate(-1px, -2px) rotate(-1deg)', offset: 0.1 },
-    { transform: 'translate(-3px, 0px) rotate(1deg)', offset: 0.2 },
-    { transform: 'translate(3px, 2px) rotate(0deg)', offset: 0.3 },
-    { transform: 'translate(1px, -1px) rotate(1deg)', offset: 0.4 },
-    { transform: 'translate(-1px, 2px) rotate(-1deg)', offset: 0.5 },
-    { transform: 'translate(-3px, 1px) rotate(0deg)', offset: 0.6 },
-    { transform: 'translate(3px, 1px) rotate(-1deg)', offset: 0.7 },
-    { transform: 'translate(-1px, -1px) rotate(1deg)', offset: 0.8 },
-    { transform: 'translate(1px, 2px) rotate(0deg)', offset: 0.9 },
-    { transform: 'translate(1px, -2px) rotate(-1deg)', offset: 1 }
-  ],
-  horizontal: [
-    { transform: 'translate(1px, 0px)', offset: 0 },
-    { transform: 'translate(-1px, 0px)', offset: 0.1 },
-    { transform: 'translate(-3px, 0px)', offset: 0.2 },
-    { transform: 'translate(3px, 0px)', offset: 0.3 },
-    { transform: 'translate(1px, 0px)', offset: 0.4 },
-    { transform: 'translate(-1px, 0px)', offset: 0.5 },
-    { transform: 'translate(-3px, 0px)', offset: 0.6 },
-    { transform: 'translate(3px, 0px)', offset: 0.7 },
-    { transform: 'translate(-1px, 0px)', offset: 0.8 },
-    { transform: 'translate(1px, 0px)', offset: 0.9 },
-    { transform: 'translate(1px, 0px)', offset: 1 }
-  ],
-  vertical: [
-    { transform: 'translateY(1px)', offset: 0 },
-    { transform: 'translateY(-1px)', offset: 0.1 },
-    { transform: 'translateY(-3px)', offset: 0.2 },
-    { transform: 'translateY(3px)', offset: 0.3 },
-    { transform: 'translateY(1px)', offset: 0.4 },
-    { transform: 'translateY(-1px)', offset: 0.5 },
-    { transform: 'translateY(-3px)', offset: 0.6 },
-    { transform: 'translateY(3px)', offset: 0.7 },
-    { transform: 'translateY(-1px)', offset: 0.8 },
-    { transform: 'translateY(1px)', offset: 0.9 },
-    { transform: 'translateY(1px)', offset: 1 }
-  ]
+const random = (value: number) => {
+  return value !== 0 ? Math.floor(Math.random() * value) - (value * 0.5) : 0
 };
 
-export default keyframes;
+const generator = ({
+  h = 5,
+  v = 5,
+  r = 0,
+  precision = 0.1,
+} = {}): Keyframe[] => {
+  const interval = (precision > 0 && precision < 1) ? 100 * precision : 10;
+  let step = interval * 0.01;
+
+  let keyframes: Keyframe[] = [];
+  while (step < 100) {
+    const x = random(h);
+    const y = random(v);
+    const rotate = random(r);
+
+    const kf = {
+      transform: `translate(${x}px,${y}px) rotate(${rotate}deg)`,
+      offset: step / 100
+    };
+    keyframes.push(kf);
+    step += interval;
+  }
+
+  return keyframes;
+};
+
+export const generateKeyframes = (type: string) => {
+  switch (type) {
+    case 'horizontal':
+      return generator({ h: 10, v: 0, r: 0 });
+    case 'vertical':
+      return generator({ h: 0, v: 10, r: 0 });
+    default:
+      return generator({ h: 7, v: 7, r: 3 });
+  }
+};
