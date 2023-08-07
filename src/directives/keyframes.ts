@@ -30,10 +30,16 @@ const generator = ({
 
 export const generateKeyframes = (type: string) => {
   switch (type) {
+    case 'little':
+      return generator({ h: 3, v: 3, r: 2 });
+    case 'hard':
+      return generator({ h: 15, v: 15, r: 7 });
     case 'horizontal':
       return generator({ h: 10, v: 0, r: 0 });
     case 'vertical':
       return generator({ h: 0, v: 10, r: 0 });
+    case 'rotate':
+      return generator({ h: 0, v: 0, r: 12 });
     default:
       return generator({ h: 7, v: 7, r: 3 });
   }
