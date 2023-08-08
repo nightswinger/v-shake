@@ -4,6 +4,7 @@ const defaultOptions = {
   trigger: "hover",
   type: "default",
   shake: null,
+  duration: 500,
 };
 
 const getOptions = (options: any) => {
@@ -21,13 +22,14 @@ const getOptions = (options: any) => {
       trigger: options.trigger || defaultOptions.trigger,
       type: options.type || defaultOptions.type,
       shake: options.shake || defaultOptions.shake,
+      duration: options.duration || defaultOptions.duration,
     };
   }
 
   return defaultOptions;
 };
 
-const setEventListeners = (el: HTMLElement, { trigger, type }: any) => {
+const setEventListeners = (el: HTMLElement, { trigger, type, duration }: any) => {
   let triggerEvent = "";
   let endEvent = "";
 
@@ -49,7 +51,7 @@ const setEventListeners = (el: HTMLElement, { trigger, type }: any) => {
     if (isInlineElement(el)) {
       el.style.display = 'inline-block';
     }
-    el.animate(keyframes, { duration: 500 });
+    el.animate(keyframes, { duration });
   });
   el.addEventListener("animationend", () => removeAnimation(el));
 
